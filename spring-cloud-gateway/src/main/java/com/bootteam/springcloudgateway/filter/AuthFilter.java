@@ -34,6 +34,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
         Route route = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
         String routeId = route != null ? route.getId() : null;
+        log.info("Route ID from Request: {}.", routeId);
+        
         if (routeId == null || CollectionUtils.isEmpty(apiKeyHeader) || !isAuthorized(routeId, apiKeyHeader.get(0))) {
             log.error("Api Key not valid");
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You cannot consume this service. Please check your api key.");
