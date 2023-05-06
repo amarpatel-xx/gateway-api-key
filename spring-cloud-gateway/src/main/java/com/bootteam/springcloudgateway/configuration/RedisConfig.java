@@ -21,7 +21,12 @@ public class RedisConfig {
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(Objects.requireNonNull(env.getProperty("spring.redis.host")), Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.redis.port"))));
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(
+                Objects.requireNonNull(env.getProperty("spring.redis.host")),
+                Integer.parseInt(Objects.requireNonNull(env.getProperty("spring.redis.port"))));
+
+        redisStandaloneConfiguration.setPassword(env.getProperty("spring.redis.password"));
+
         return new JedisConnectionFactory(redisStandaloneConfiguration);
     }
     @Bean

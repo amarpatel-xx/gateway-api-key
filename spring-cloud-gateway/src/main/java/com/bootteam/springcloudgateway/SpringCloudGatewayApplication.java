@@ -51,6 +51,4 @@ public class SpringCloudGatewayApplication {
             apiKeys.forEach(k -> redisHashComponent.hSet(AppConstant.RECORD_KEY,k.getKey() , k));
         }
     }
-
-
 }
